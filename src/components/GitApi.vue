@@ -5,7 +5,7 @@
 <script>
 import axios from 'axios';
 
-const token = '84e4588a6e7c2f676c57e0595eeacb9097a9ebf0';
+const token = '';
 const baseDomain = "https://api.github.com";
 const user = 'placeholder';
 const url = '/search/repositories';
