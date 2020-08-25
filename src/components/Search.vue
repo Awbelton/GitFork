@@ -2,20 +2,61 @@
     <div class="row justify-content-center main">
         <div class="active-purple-3 active-purple-4 mb-4">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search GitHub">
+                <input type="text" class="form-control" placeholder="Search GitHub by Repo Name" v-model="name">
                 <div class="input-group-append">
-                    <button class="btn btn-secondary" type="button">
-                    Search
+                    <button class="btn btn-secondary" type="button" @click="searchName">
+                      Search
                     </button>
                 </div>
-  </div>
+              </div>
         </div>
+        <Results repos="this.data()" v-show="hasResults" />
     </div>
 </template>
 
 <script>
+import ApiService from '../services/ApiService'
+import Results from './Results'
+
 export default {
   name: 'Search',
-  props: {}
+  props: {},
+  components: {
+    Results
+  },
+  data () {
+    return {
+      repos: [],
+      hasResults: false
+    }
+  },
+  methods: {
+    async getRepos() {
+
+    },
+    retrieveRepos: function() {
+      ApiService.get()
+        .then(response => {
+          this.repos = response.data
+          console.log(response)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    searchName: function() {
+      ApiService.findByName(this.name)
+        .then(response => {
+          this.repos = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
+  },
+  mounted() {
+    this.retrieveRepos()
+  }
 }
 </script>

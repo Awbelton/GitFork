@@ -1,10 +1,6 @@
 <template>
-  <div class="d-flex justify-content-center">
-    <div id="app">
-      <img alt="GitFork Logo" src="./assets/logo.png">
-      <br /> <br />
-      <Main msg="Welcome to GitFork"/>
-    </div>
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
@@ -13,12 +9,7 @@
 </style>
 
 <script>
-import Main from './components/Main.vue'
-
 export default {
-  name: 'app',
-  components: {
-    Main
-  }
+  name: 'app'
 }
 </script>

@@ -9,11 +9,12 @@ const token = '';
 const baseDomain = "https://api.github.com";
 const user = 'placeholder';
 const url = '/search/repositories';
-const res = `${baseDomain}/${url}?q=topic:python`;
+const res = `${baseDomain}${url}?q=`;
 
 export default {
   data() {
     return {
+      repos: [],
       forks: [],
       errors: []
     }
