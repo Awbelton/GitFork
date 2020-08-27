@@ -1,8 +1,9 @@
 <template>
+  <div>
     <div class="row justify-content-center main">
         <div class="active-purple-3 active-purple-4 mb-4">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search GitHub by Repo Name" v-model="name">
+                <input type="text" class="form-control" placeholder="Search GitHub by Repo Name">
                 <div class="input-group-append">
                     <button class="btn btn-secondary" type="button" @click="searchName">
                       Search
@@ -10,8 +11,9 @@
                 </div>
               </div>
         </div>
-        <Results repos="this.data()" v-show="hasResults" />
     </div>
+    <Results :repos="this.repos" v-show="hasResults" />
+  </div>
 </template>
 
 <script>
@@ -48,7 +50,11 @@ export default {
       ApiService.findByName(this.name)
         .then(response => {
           this.repos = response.data
-          console.log(response.data)
+          console.log(this.repos)
+
+          if (this.repos.length > 0) {
+            this.hasResults = true;
+          }
         })
         .catch(e => {
           console.log(e)
@@ -56,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    this.retrieveRepos()
+    //this.retrieveRepos()
   }
 }
 </script>
